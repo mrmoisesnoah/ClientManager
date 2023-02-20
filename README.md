@@ -8,7 +8,7 @@ CRUD criado para simular um gerenciador de clientes, utilizando apenas as tecnol
 Como Utilizar:
 
 Clone o repositorio no seu PC, garanta que seu eclipse esteja configurado com as versões indicadas acima. Depois basta realizar o deploy no Tomcat, utilizando a opção RUN with Server, e acessar a pagina pelo link:
-http://localhost:8080/
+http://localhost:8080/ClientManager/
 
 
 
