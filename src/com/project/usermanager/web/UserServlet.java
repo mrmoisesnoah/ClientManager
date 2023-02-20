@@ -2,6 +2,7 @@ package com.project.usermanager.web;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -87,9 +88,11 @@ public class UserServlet extends HttpServlet {
 		    throws SQLException, IOException {
 		        String name = request.getParameter("name");
 		        String cpf = request.getParameter("cpf");
+		        LocalDate dateOfBirth = LocalDate.parse(request.getParameter("dateOfBirth"));
 		        String email = request.getParameter("email");
+		        String phone = request.getParameter("phone");
 		        String country = request.getParameter("country");
-		        User newUser = new User(name,cpf, email, country);
+		        User newUser = new User(name,cpf, dateOfBirth, email, phone, country);
 		        userDAO.createUser(newUser);
 		        response.sendRedirect("list");
 		    }
@@ -99,10 +102,12 @@ public class UserServlet extends HttpServlet {
 		        int id = Integer.parseInt(request.getParameter("id"));
 		        String name = request.getParameter("name");
 		        String cpf = request.getParameter("cpf");
+		        LocalDate dateOfBirth = LocalDate.parse(request.getParameter("dateOfBirth"));
 		        String email = request.getParameter("email");
+		        String phone = request.getParameter("phone");
 		        String country = request.getParameter("country");
 
-		        User book = new User(id,name,cpf, email, country);
+		        User book = new User(id,name,cpf, dateOfBirth, email, phone, country);
 		        userDAO.updateUser(book);
 		        response.sendRedirect("list");
 		    }

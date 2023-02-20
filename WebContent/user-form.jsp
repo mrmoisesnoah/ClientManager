@@ -13,11 +13,11 @@
             <header>
                 <nav class="navbar navbar-expand-md navbar-dark" style="background-color: gold">
                     <div>
-                        <a href="https://www.javaguides.net" class="navbar-brand"> Client Management App </a>
+                        <a href="<%=request.getContextPath()%>/list" class="navbar-brand"> Client Management App </a>
                     </div>
 
                     <ul class="navbar-nav">
-                        <li><a href="<%=request.getContextPath()%>/list" class="nav-link">Clients</a></li>
+                        <li><a href="http://www.github.com/mrmoisesnoah" class="nav-link">Created by Moisés Noah</a></li>
                     </ul>
                 </nav>
             </header>
@@ -48,19 +48,27 @@
                         </c:if>
 
                         <fieldset class="form-group">
-                            <label>Client Name</label> <input type="text" value="<c:out value='${user.name}' />" class="form-control" name="name" required="required">
+                            <label>Name</label> <input type="text" maxlength="50" placeholder="John Doe" value="<c:out value='${user.name}' />" class="form-control" name="name" required="required">
                         </fieldset>
                         
                         <fieldset class="form-group">
-                            <label>Client CPF</label> <input type="text" value="<c:out value='${user.cpf}' />" class="form-control" name="cpf" required="required">
+                            <label>CPF</label> <input type="text" maxlength="11" placeholder="Insert numbers only" value="<c:out value='${user.cpf}' />" class="form-control" name="cpf" required="required">
+                        </fieldset>
+                        
+                         <fieldset class="form-group">
+                            <label>Date of Birth</label> <input type="date" value="<c:out value='${user.dateOfBirth}' />" class="form-control" name="dateOfBirth" required="required">
                         </fieldset>
 
                         <fieldset class="form-group">
-                            <label>Client Email</label> <input type="text" value="<c:out value='${user.email}' />" class="form-control" name="email">
+                            <label>Email</label> <input type="email" placeholder="john@email.com" value="<c:out value='${user.email}' />" class="form-control" name="email" required="required">
+                        </fieldset>
+                        
+                        <fieldset class="form-group">
+                            <label>Phone Number</label> <input type="text" placeholder="(99)99999-9999" value="<c:out value='${user.email}' />" class="form-control" name="phone">
                         </fieldset>
 
                         <fieldset class="form-group">
-                            <label>Client Country</label> <input type="text" value="<c:out value='${user.country}' />" class="form-control" name="country">
+                            <label>Country</label> <input type="text" maxlength="20" placeholder="Brazil" value="<c:out value='${user.country}' />" class="form-control" name="country">
                         </fieldset>
 
                         <button type="submit" class="btn btn-success">Save</button>

@@ -13,12 +13,12 @@
             <header>
                 <nav class="navbar navbar-expand-md navbar-dark" style="background-color: gold">
                     <div>
-                        <a href="https://www.javaguides.net" class="navbar-brand"> Client
-     Management App </a>
+                        <a href="<%=request.getContextPath()%>/list" class="navbar-brand"> <strong>Client
+     Management App </strong> </a>
                     </div>
 
                     <ul class="navbar-nav">
-                        <li><a href="<%=request.getContextPath()%>/list" class="nav-link">Clients</a></li>
+                        <li><a href="http://www.github.com/mrmoisesnoah" class="nav-link"><strong>Created by Moisés Noah</strong></a></li>
                     </ul>
                 </nav>
             </header>
@@ -28,7 +28,7 @@
                 <!-- <div class="alert alert-success" *ngIf='message'>{{message}}/> -->
 
                 <div class="container">
-                    <h3 class="text-center">List of Clients</h3>
+                    <h3 class="text-center">Customers list</h3>
                     <hr>
                     <div class="container text-left">
 
@@ -42,7 +42,9 @@
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>CPF</th>
+                                <th>Date Of Birth</th>
                                 <th>Email</th>
+                                <th>Phone Number</th>
                                 <th>Country</th>
                                 <th>Actions</th>
                             </tr>
@@ -62,7 +64,13 @@
                                         <c:out value="${user.cpf}" />
                                     </td>
                                     <td>
+                                        <c:out value="${user.dateOfBirth}" />
+                                    </td>
+                                    <td>
                                         <c:out value="${user.email}" />
+                                    </td>
+                                    <td>
+                                        <c:out value="${user.phone}" />
                                     </td>
                                     <td>
                                         <c:out value="${user.country}" />

@@ -1,10 +1,12 @@
 package com.project.usermanager.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,13 +17,13 @@ public class UserDAO {
 	private String jdbcUsername = "root";
 	private String jdbcPassword = "root";
 	
-	private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (name, cpf, email, country) VALUES " +
-	        " (?, ?, ?, ?);";
+	private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (name, cpf, date_of_birth, email, phone, country) VALUES " +
+	        " (?, ?, ?, ?, ?, ?);";
 
-    private static final String SELECT_USER_BY_ID = "select id, name, cpf, email, country from users where id =?";
+    private static final String SELECT_USER_BY_ID = "select id, name, cpf, date_of_birth, email, phone, country from users where id =?";
     private static final String SELECT_ALL_USERS = "select * from users";
     private static final String DELETE_USERS_SQL = "delete from users where id = ?;";
-    private static final String UPDATE_USERS_SQL = "update users set name = ?, cpf = ?, email= ?, country =? where id = ?;";
+    private static final String UPDATE_USERS_SQL = "update users set name = ?, cpf = ?, date_of_birth = ?, email= ?, phone= ?, country=? where id = ?;";
 
     protected Connection getConnection() {
         Connection connection = null;
@@ -48,10 +50,12 @@ public class UserDAO {
 
             while (rs.next()) {
                 String name = rs.getString("name");
-                String cpf = rs.getString("cpf");     
+                String cpf = rs.getString("cpf");
+                LocalDate dateOfBirth = rs.getDate("date_of_birth").toLocalDate();
                 String email = rs.getString("email");
+                String phone = rs.getString("phone");
                 String country = rs.getString("country");
-                user = new User(id, name, cpf, email, country);
+                user = new User(id, name, cpf, dateOfBirth, email, phone, country);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -71,9 +75,11 @@ public class UserDAO {
             	 Integer idUser = rs.getInt("id");
                  String name = rs.getString("name");
                  String cpf = rs.getString("cpf");
+                 LocalDate dateOfBirth = rs.getDate("date_of_birth").toLocalDate();
                  String email = rs.getString("email");
+                 String phone = rs.getString("phone");
                  String country = rs.getString("country");
-                 users.add(new User(idUser, name, cpf, email, country));
+                 users.add(new User(idUser, name, cpf, dateOfBirth, email, phone, country));
              }
          } catch (SQLException e) {
              e.printStackTrace();
@@ -87,8 +93,10 @@ public class UserDAO {
     			PreparedStatement pStmt = connection.prepareStatement(INSERT_USERS_SQL)){
 			pStmt.setString(1, user.getName());
 			pStmt.setString(2, user.getCpf());
-			pStmt.setString(3, user.getEmail());
-			pStmt.setString(4, user.getCountry());
+			pStmt.setDate(3, Date.valueOf(user.getDateOfBirth()));
+			pStmt.setString(4, user.getEmail());
+			pStmt.setString(5, user.getPhone());
+			pStmt.setString(6, user.getCountry());
 			pStmt.executeUpdate();
 			
 		} catch (Exception e) {
@@ -104,9 +112,11 @@ public class UserDAO {
     			PreparedStatement pStmt = connection.prepareStatement(UPDATE_USERS_SQL)){
 			pStmt.setString(1, user.getName());
 			pStmt.setString(2, user.getCpf());
-			pStmt.setString(3, user.getEmail());
-			pStmt.setString(4, user.getCountry());
-			pStmt.setInt(5, user.getId());
+			pStmt.setDate(3, Date.valueOf(user.getDateOfBirth()));
+			pStmt.setString(4, user.getEmail());
+			pStmt.setString(5, user.getPhone());
+			pStmt.setString(6, user.getCountry());
+			pStmt.setInt(6, user.getId());
 			rowUpdated = pStmt.executeUpdate() > 0;
     	}
     	return rowUpdated;
